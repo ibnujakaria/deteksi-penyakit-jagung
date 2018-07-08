@@ -1,0 +1,22 @@
+{
+  "name": "deteksi-penyakit-jagung",
+  "version": "1.0.0",
+  "description": "Deteksi penyakit pada (daun) jagung berbasis citra dengan menggunakan metode GLRLM dan FCH.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node main.js"
+  },
+  "keywords": [
+    "Image",
+    "Processing",
+    "Jagung",
+    "Image",
+    "Classification"
+  ],
+  "author": "Nurul Huda <ibnujakaria@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jimp": "^0.2.28"
+  }
+}
