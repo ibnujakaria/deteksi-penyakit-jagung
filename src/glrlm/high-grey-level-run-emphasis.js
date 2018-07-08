@@ -1,6 +1,6 @@
 exports.compute = (glrlm) => {
   let matrix = glrlm.matrix
-  let lglre = 0
+  let hglre = 0
   let n = matrix.rows.length * matrix.columns.length
 
   let i = 0
@@ -8,15 +8,15 @@ exports.compute = (glrlm) => {
   matrix.rows.forEach(row => {
     // do a looping for every column, start from 1
     row.forEach(col => {
-      let colMultipledByPoweredI = col / Math.pow(i, 2)
+      let colMultipledByPoweredI = col * Math.pow(i, 2)
 
       if (!isNaN(colMultipledByPoweredI) && colMultipledByPoweredI !== Infinity) {
-        lglre += colMultipledByPoweredI
+        hglre += colMultipledByPoweredI
       }
     })
 
     i++
   })
 
-  return lglre / n
+  return hglre / n
 }
