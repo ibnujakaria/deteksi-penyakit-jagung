@@ -8,13 +8,11 @@ exports.compute = (glrlm) => {
     let length = 1
 
     row.forEach(col => {
-      if (col === 0) {
-        col = 0.1
+      if (col > 0) {
+        let colMultipliedByLength = (col * length++)
+
+        rp += n / colMultipliedByLength
       }
-
-      let colMultipliedByLength = (col * length++)
-
-      rp += n / colMultipliedByLength
     })
   })
 
