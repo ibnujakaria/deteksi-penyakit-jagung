@@ -31,7 +31,7 @@ module.exports = class Triangular {
           membershipValue = -(x - triangular.c) / (triangular.c - triangular.b)
         }
 
-        groups.push({ triangular, membershipValue })
+        groups.push({ label: triangular.label, membershipValue })
       }
     })
 
