@@ -1,5 +1,3 @@
-let rgbToXyz = require('./src/prepare/rgb-to-xyz.js')
-let xyzToLab = require('./src/prepare/xyz-to-cielab.js')
+let rgbToCielab = require('./src/prepare/rgb-to-cielab')
 
-console.log(rgbToXyz.convert({ r: 100, g: 100, b: 100 }))
-console.log(xyzToLab.convert({ x: 1, y: 1, z: 1 }))
+console.log(rgbToCielab.convert({ r: 100, g: 100, b: 100 }))
