@@ -31,6 +31,16 @@ module.exports = class Rule {
     return this
   }
 
+  /**
+   * fuzzySets is an array returns from membership function
+   * label is a string contains linguistic variable
+   */
+  isNot (fuzzySets, label) {
+    this.statements.push({ fuzzySets, type: 'is-not', label })
+
+    return this
+  }
+
   and () {
     if (this.comparisons.length < this.statements.length) {
       this.comparisons.push('and')
@@ -63,17 +73,21 @@ module.exports = class Rule {
       console.log(statement)
       let result = { bool: false, value: 0 }
 
-      if (statement.type === 'is') {
-        statement.fuzzySets.forEach(set => {
-          console.log(`if ${set.label} is ${statement.label}`)
+      statement.fuzzySets.forEach(set => {
+        console.log(`if ${set.label} ${statement.type} ${statement.label}`)
+
+        if (statement.type === 'is') {
           if (set.label === statement.label) {
             result = { bool: true, value: set.membershipValue}
             console.log('true')
-          } else {
-            console.log('false')
           }
-        })
-      }
+        } else if (statement.type === 'is-not') {
+          if (set.label !== statement.label) {
+            result = { bool: true, value: set.membershipValue}
+            console.log('true')
+          }
+        }
+      })
 
       this.resultOfStatements.push(result)
     })
