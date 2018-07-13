@@ -25,4 +25,4 @@ let triangular = new Triangular({
   ]
 })
 
-console.log(triangular.membership(21))
+exports.membership = (l) => triangular.membership(l)

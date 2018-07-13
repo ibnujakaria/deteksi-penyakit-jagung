@@ -37,10 +37,4 @@ let triangular = new Triangular({
   ]
 })
 
-console.log(triangular.membership(-50))
-console.log(triangular.membership(-40))
-console.log(triangular.membership(0))
-console.log(triangular.membership(0.4))
-console.log(triangular.membership(20))
-console.log(triangular.membership(40))
-console.log(triangular.membership(60))
+exports.membership = (b) => triangular.membership(b)

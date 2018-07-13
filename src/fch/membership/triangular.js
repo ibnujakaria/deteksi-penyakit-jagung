@@ -15,8 +15,6 @@ module.exports = class Triangular {
   membership (x) {
     let groups = []
 
-    console.log(`x -> ${x}\n`)
-
     // looking for membership value of each triangulars
     this.triangulars.forEach(triangular => {
       if (x <= triangular.a || x >= triangular.c) {
