@@ -37,4 +37,4 @@ let triangular = new Triangular({
   ]
 })
 
-exports.membership = (b) => triangular.membership(b)
+exports.val = (b) => triangular.membership(b)

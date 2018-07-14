@@ -1,0 +1,26 @@
+L is black  &&   a is amiddle     &&   is bmiddle     then  is black
+L is black                        &&   is bluish     then  is blue
+L is grey   &&   a is NOT green   &&   is blue        then  is blue
+L is white  &&   a is amiddle     &&   is bluish     then  is blue
+L is white  &&   a is greenish    &&   is bluish     then  is blue
+L is black  &&   a is reddish     &&   is blue        then  is navy
+L is grey   &&   a is red         &&   is NOT blue    then  is red
+L is grey   &&   a is reddish     &&   is bmiddle     then  is red
+L is black  &&   a is reddish     &&   is yellowish   then  is red
+L is grey   &&   a is reddish     &&   is yellow      then  is yellow
+L is white  &&   a is amiddle     &&   is yellow      then  is yellow
+L is white  &&   a is greenish    &&   is yellow      then  is yellow
+L is grey   &&   a is reddish     &&   is bluish     then  is magenta
+L is white  &&   a is reddish     &&   is bluish     then  is magenta
+L is grey   &&   a is amidle      &&   is yellowish   then  is brown
+L is white  &&   a is reddish     &&   is yellow      then  is brown
+L is grey   &&   a is amiddle     &&   is bmiddle     then  is grey
+L is grey   &&   a is greenish    &&   is yellow      then  is green
+L is white  &&   a is green       &&   is yellowish   then  is green
+L is grey   &&   a is greenish    &&   is bmiddle     then  is teal
+L is grey   &&   a is green       &&   is blue        then  is violet
+L is white  &&   a is red         &&   is yellow      then  is orange
+L is white  &&   a is reddish     &&   is bmiddle     then  is pink
+L is white  &&   a is amiddle     &&   is bmiddle     then  is white
+L is white  &&   a is greenish    &&   is bmiddle     then  is cyan
+L is white  &&   a is green       &&   is bluish      then  is cyan

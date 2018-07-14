@@ -70,21 +70,21 @@ module.exports = class Rule {
 
   gettingResultOfEveryStatements () {
     this.statements.forEach(statement => {
-      console.log(statement)
+      // console.log(statement)
       let result = { bool: false, value: 0 }
 
       statement.fuzzySets.forEach(set => {
-        console.log(`if ${set.label} ${statement.type} ${statement.label}`)
+        // console.log(`if ${set.label} ${statement.type} ${statement.label}`)
 
         if (statement.type === 'is') {
           if (set.label === statement.label) {
             result = { bool: true, value: set.membershipValue}
-            console.log('true')
+            // console.log('true')
           }
         } else if (statement.type === 'is-not') {
           if (set.label !== statement.label) {
             result = { bool: true, value: set.membershipValue}
-            console.log('true')
+            // console.log('true')
           }
         }
       })
@@ -97,7 +97,7 @@ module.exports = class Rule {
     if (this.comparisons.length < 1 && this.resultOfStatements.length === 1) {
       this.comparedResult = this.resultOfStatements[0]
     } else {
-      console.log(this.resultOfStatements)
+      // console.log(this.resultOfStatements)
 
       let i = 0
       let lastBool = this.resultOfStatements[i].bool
@@ -113,7 +113,7 @@ module.exports = class Rule {
           currentBool = lastBool || nextBool
         }
 
-        console.log(`${lastBool} ${comparison} ${nextBool} -> ${currentBool}`)
+        // console.log(`${lastBool} ${comparison} ${nextBool} -> ${currentBool}`)
 
         lastBool = currentBool
         i++

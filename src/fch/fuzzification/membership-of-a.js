@@ -5,13 +5,13 @@ let triangular = new Triangular({
   max: 98.2352,
   triangulars: [
     {
-      label: 'red',
+      label: 'green',
       a: -130,
       b: -86.1813,
       c: -30
     },
     {
-      label: 'reddish',
+      label: 'greenish',
       a: -75,
       b: 40,
       c: 0
@@ -23,13 +23,13 @@ let triangular = new Triangular({
       c: 10
     },
     {
-      label: 'greenish',
+      label: 'reddish',
       a: 0,
       b: 40,
       c: 80
     },
     {
-      label: 'green',
+      label: 'red',
       a: 40,
       b: 98.2352,
       c: 130
@@ -37,4 +37,4 @@ let triangular = new Triangular({
   ]
 })
 
-exports.membership = (a) => triangular.membership(a)
+exports.val = (a) => triangular.membership(a)
