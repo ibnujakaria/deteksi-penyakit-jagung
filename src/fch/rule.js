@@ -122,4 +122,16 @@ module.exports = class Rule {
       this.comparedResult = lastBool
     }
   }
+
+  smallestMembershipValue () {
+    let smallestMembershipValue = 1
+
+    this.resultOfStatements.forEach(result => {
+      if (result.value < smallestMembershipValue) {
+        smallestMembershipValue = result.value
+      }
+    })
+
+    return smallestMembershipValue
+  }
 }
