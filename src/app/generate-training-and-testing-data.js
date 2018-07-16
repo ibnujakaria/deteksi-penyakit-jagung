@@ -32,7 +32,7 @@ let nTraining = Math.floor(trainingInPercent / 100 * images.length)
 for (let i = 0; i < nTraining; i++) {
   let index = Math.floor(Math.random() * Math.floor(images.length))
 
-  data.training.push(images.splice(index, 1))
+  data.training.push(images.splice(index, 1)[0])
 }
 
 // the rest of images variable is for testing data
@@ -43,7 +43,7 @@ let imagesForTesting = [ ...images ]
 for (let i = 0; i < images.length; i++) {
   let index = Math.floor(Math.random() * Math.floor(imagesForTesting.length))
 
-  data.testing.push(imagesForTesting.splice(index, 1))
+  data.testing.push(imagesForTesting.splice(index, 1)[0])
 }
 
 fs.writeFileSync('./dist/labeled-data.json', JSON.stringify(data))
