@@ -28,6 +28,8 @@ exports.getGreyscale = (image) => {
   let lastY = 0
   let row = []
 
+  image.greyscale()
+
   image.scan(0, 0, image.bitmap.width, image.bitmap.height, (x, y, idx) => {
     let color = image.bitmap.data[idx + 0]
 
