@@ -44,6 +44,10 @@ module.exports = class Logic {
       }
     })
 
+    if (results.length < 1) {
+      return { possibleLinguisticColors, then: null }
+    }
+
     if (results.length === 1) {
       return { possibleLinguisticColors, then: results[0].then }
     }

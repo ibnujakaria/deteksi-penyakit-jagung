@@ -1,3 +1,10 @@
-let rgbToCielab = require('./src/prepare/rgb-to-cielab')
+let Jimp = require('jimp')
+let Fch = require('./src/fch/fch.js')
 
-console.log(rgbToCielab.convert({ r: 100, g: 100, b: 100 }))
+Jimp.read('./images/removeobjects.jpg').then(image => {
+
+  let fch = new Fch(image)
+
+  console.log(fch.getHistogram())
+  console.log(fch.getNormalizedHistogram())
+})
