@@ -17,6 +17,7 @@
   "author": "Nurul Huda <ibnujakaria@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "jimp": "^0.2.28"
+    "jimp": "^0.2.28",
+    "json-beautify": "^1.0.1"
   }
 }

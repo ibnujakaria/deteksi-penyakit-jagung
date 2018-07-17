@@ -6,6 +6,7 @@
  * The result will be saved on /dist directory
  */
 
+let beautify = require("json-beautify")
 let fs = require('fs')
 let rootPath = './images/penyakit-jagung'
 
@@ -17,7 +18,7 @@ labels.forEach(label => {
   let _images = fs.readdirSync(`${rootPath}/${label}`)
 
   _images.forEach(path => {
-    images.push({ path, label })
+    images.push({ path: `${label}/${path}`, label })
   })
 })
 
@@ -46,7 +47,7 @@ for (let i = 0; i < images.length; i++) {
   data.testing.push(imagesForTesting.splice(index, 1)[0])
 }
 
-fs.writeFileSync('./dist/labeled-data.json', JSON.stringify(data))
+fs.writeFileSync('./dist/labeled-data.json', beautify(data, null, 2, 100))
 
 console.log('panjang training -> ' + data.training.length)
 console.log('panjang testing -> ' + data.testing.length)
