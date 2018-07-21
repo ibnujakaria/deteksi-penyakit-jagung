@@ -7,48 +7,70 @@
  */
 
 let beautify = require("json-beautify")
-let fs = require('fs')
+let fs = require('fs-extra')
 let rootPath = './images/penyakit-jagung'
 
-let images = []
+let data = []
 
 let labels = fs.readdirSync(rootPath)
 
 labels.forEach(label => {
   let _images = fs.readdirSync(`${rootPath}/${label}`)
+  let images = []
 
-  _images.forEach(path => {
-    images.push({ path: `${label}/${path}`, label })
+  _images.forEach((path, no) => {
+    images.push({ no, path: `${label}/${path}`, label })
   })
+
+  data.push({ label, images })
 })
-
-let data = {
-  training: [],
-  testing: []
-}
-
-let trainingInPercent = 70
-let nTraining = Math.floor(trainingInPercent / 100 * images.length)
-
-for (let i = 0; i < nTraining; i++) {
-  let index = Math.floor(Math.random() * Math.floor(images.length))
-
-  data.training.push(images.splice(index, 1)[0])
-}
-
-// the rest of images variable is for testing data
-let nTesting = images.length
-// replicate it so it doesn't affect the for
-let imagesForTesting = [ ...images ]
-
-for (let i = 0; i < images.length; i++) {
-  let index = Math.floor(Math.random() * Math.floor(imagesForTesting.length))
-
-  data.testing.push(imagesForTesting.splice(index, 1)[0])
-}
 
 fs.writeFileSync('./dist/labeled-data.json', beautify(data, null, 2, 100))
 
-console.log('panjang training -> ' + data.training.length)
-console.log('panjang testing -> ' + data.testing.length)
-console.log('data output -> /dist/labeled-data.json')
+// k-fold cross validation
+let k = 4
+
+let slicedData = []
+
+data.forEach(row => {
+  let lengthPerPartial = Math.floor(row.images.length / k)
+  let partials = []
+
+  for (let i = 0; i < k; i++) {
+    partials.push(row.images.splice(0, lengthPerPartial))
+  }
+
+  // if there is  anything left
+  if (row.images.length) {
+    partials[partials.length - 1] = partials[partials.length - 1].concat(row.images)
+  }
+
+  slicedData.push(partials)
+})
+
+fs.writeFileSync('./dist/labeled-data-sliced.json', beautify(slicedData, null, 2, 100))
+console.log('data output -> /dist/labeled-data-sliced.json')
+
+// generate training and testing data based on the k
+fs.removeSync('./dist/k-fold')
+fs.mkdirSync('./dist/k-fold')
+for (let i = 0; i < k; i++) {
+  let training = []
+  let testing = []
+
+  slicedData.forEach(data => {
+    data.forEach((images, j) => {
+      images.forEach(image => {
+        if (i === j) {
+          testing.push(image)
+        } else {
+          training.push(image)
+        }
+      })
+
+    })
+  })
+
+  fs.writeFileSync(`./dist/k-fold/data-${i + 1}.json`, beautify({ training, testing }, null, 2, 100))
+  console.log(`data output -> /dist/k-fold/data-${i + 1}.json`)
+}
