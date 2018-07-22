@@ -10,40 +10,39 @@ let Glrlm = require('../glrlm/glrlm.js')
 
 try {
   let rawData = fs.readFileSync('./dist/labeled-data.json')
-  let data = JSON.parse(rawData)
-  let keys = ['training', 'testing']
-  let result = {
-    training: [],
-    testing: []
-  }
+  let labeledData = JSON.parse(rawData)
 
-  keys.forEach(key => {
+  let imagesHadBeenRead = 0 // the length of read images
 
-    data[key].forEach(raw => {
-      Jimp.read(`./images/penyakit-jagung/${raw.path}`).then(image => {
-        console.log(`training ${raw.path}`)
+  labeledData.data.forEach(group => {
+    group.images.forEach(image => {
+      Jimp.read(`./images/penyakit-jagung/${image.path}`).then(jimpImage => {
+        imagesHadBeenRead++
+        console.log(`training ${image.path} (${imagesHadBeenRead}/${labeledData.imagesLength})`)
 
         // console.log('   -> running fch..')
-        let fch = new Fch(image)
+        let fch = new Fch(jimpImage)
         let color = fch.getNormalizedHistogram()
 
         // console.log('   -> running glrlm')
-        let glrlm = new Glrlm(image)
+        let glrlm = new Glrlm(jimpImage)
         let texture = glrlm.getFeatures()
 
-        result[key].push({ raw, color, texture })
+        image.feature = { color, texture }
 
-        if (result[key].length === data[key].length) {
+
+        if (imagesHadBeenRead === labeledData.imagesLength) {
           console.log('data terakhir')
-          console.log(`tulis hasil ke file /dist/extracted-feature-for-data-${key}.json`)
+          console.log(`tulis hasil ke file /dist/extracted-data.json`)
 
           fs.writeFileSync(
-            `./dist/extracted-feature-for-data-${key}.json`, beautify(result[key], null, 2, 100)
+            `./dist/extracted-data.json`, beautify(labeledData, null, 2, 100)
           )
         }
       })
     })
   })
+
 } catch (error) {
   console.error(error)
   console.log('data is not found')

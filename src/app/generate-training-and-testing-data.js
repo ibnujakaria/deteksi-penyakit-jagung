@@ -11,7 +11,7 @@ let fs = require('fs-extra')
 let rootPath = './images/penyakit-jagung'
 
 let data = []
-
+let imagesLength = 0
 let labels = fs.readdirSync(rootPath)
 
 labels.forEach(label => {
@@ -20,12 +20,13 @@ labels.forEach(label => {
 
   _images.forEach((path, no) => {
     images.push({ no, path: `${label}/${path}`, label })
+    imagesLength++
   })
 
   data.push({ label, images })
 })
 
-fs.writeFileSync('./dist/labeled-data.json', beautify(data, null, 2, 100))
+fs.writeFileSync('./dist/labeled-data.json', beautify({ imagesLength, data }, null, 2, 100))
 
 // k-fold cross validation
 let k = 4
