@@ -1,15 +1,44 @@
-let Jimp = require('jimp')
-let Fch = require('./src/fch/fch.js')
-let Glrlm = require('./src/glrlm/glrlm.js')
+let fs = require('fs')
+let featureFinder = require('./src/app/find-feature-by-path.js')
+let prediction = require('./src/app/prediction.js')
 
-Jimp.read('./images/motor-club.jpg').then(image => {
+let kFolds = fs.readdirSync('./dist/k-fold')
 
-  let fch = new Fch(image)
+let correct = 0
+let incorrect = 0
+let length = 0
 
-  // console.log(fch.getHistogram())
-  console.log(fch.getNormalizedHistogram())
+kFolds.forEach((file, i) => {
+  // console.log(`k-fold ${i}`)
+  // console.log('------------------')
 
-  let glrlm = new Glrlm(image)
+  let data = JSON.parse(fs.readFileSync(`./dist/k-fold/${file}`))
 
-  console.log(glrlm.getFeatures())
+  let trainingFeatures = []
+  let testingFeatures = []
+
+  data.training.forEach(image => {
+    trainingFeatures.push(featureFinder.findFeature(image.path))
+  })
+
+  data.testing.forEach(image => {
+    testingFeatures.push(featureFinder.findFeature(image.path))
+  })
+
+  testingFeatures.forEach(image => {
+    if (prediction.predict(image, trainingFeatures)) {
+      correct++
+    } else {
+      incorrect++
+    }
+    length++
+  })
 })
+
+let accuracy = (correct / incorrect * 100).toFixed(2)
+
+console.log(`correct -> ${correct}`)
+console.log(`incorrect -> ${incorrect}`)
+console.log(`length -> ${length}`)
+
+console.log(`accuracy -> ${accuracy}%`)

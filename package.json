@@ -4,7 +4,7 @@
   "description": "Deteksi penyakit pada (daun) jagung berbasis citra dengan menggunakan metode GLRLM dan FCH.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node testing.js",
     "dev": "node main.js"
   },
   "keywords": [

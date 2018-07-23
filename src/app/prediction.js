@@ -1,57 +1,58 @@
 let fs = require('fs')
 let ed = require('./euclidean-distance.js')
 
-// image
-let path = 'hawar-daun/17894438702_d8f5b644cd_o_2.jpg'
-let inputImage = null
-let inputFeature = null
+/**
+ * @param {object} inputImage
+ * The object inputImage is an object with all features extracted
+ * @param {array} datasets
+ * Array of images with all features extracted, or we can call it as training data
+ */
+exports.predict = (inputImage, datasets) => {
+  let distances = []
+  // let inputFeatures = Object.values(inputImage.feature.color).concat(Object.values(inputImage.feature.texture))
+  let inputFeatures = Object.values(inputImage.feature.texture)
 
-// all data
-let extractedData = JSON.parse(fs.readFileSync('dist/extracted-data.json'))
-
-// ambil path yang sekarang ini featurenya (ndak usah extract manual deh, tinggal cari)
-extractedData.data.forEach(label => {
-  label.images.forEach(image => {
-    if (image.path === path) {
-      let color = Object.values(image.feature.color)
-      let texture = Object.values(image.feature.texture)
-
-      // inputFeature = color.concat(texture)
-      inputFeature = texture
-      inputImage = image
-    }
-  })
-})
-
-let distances = []
-
-extractedData.data.forEach(label => {
+  let lastLabel = null
+  let currentLabelLength = 1
   let distanceToCurrentLabel = 0
 
-  label.images.forEach(image => {
-    if (image.path !== path) {
-      let color = Object.values(image.feature.color)
-      let texture = Object.values(image.feature.texture)
-      // let currentFeature = color.concat(texture)
-      let currentFeature = texture
+  datasets.forEach((image, i) => {
+    if (lastLabel !== image.label) {
+      lastLabel = image.label
+      currentLabelLength = 1
+      distanceToCurrentLabel = 0
+    } else if (datasets[i + 1] && datasets[i + 1].label !== image.label || !datasets[i + 1]) {
+      // console.log(`${image.label} -> ${currentLabelLength} gambar`)
+      distances.push({ label: image.label, distance: distanceToCurrentLabel / currentLabelLength })
+    } else {
+      currentLabelLength++
 
-      distanceToCurrentLabel += ed.measure(currentFeature, inputFeature)
+      // let currentFeatures = Object.values(image.feature.color).concat(Object.values(image.feature.texture))
+      let currentFeatures = Object.values(image.feature.texture)
+      distanceToCurrentLabel += ed.measure(inputFeatures, currentFeatures)
+    }
+
+  })
+
+
+
+  let prediction = null
+  let minimumDistance = Number.MAX_SAFE_INTEGER
+
+  distances.forEach(distance => {
+    if (distance.distance < minimumDistance) {
+      minimumDistance = distance.distance
+      prediction = distance
     }
   })
 
-  distances.push({ label: label.label, distance: distanceToCurrentLabel / label.images.length })
-})
+  // console.log(distances)
+  // console.log(`${inputImage.label} === ${prediction.label} -> ${inputImage.label === prediction.label}`)
+  // console.log('---------------')
 
-let prediction = null
-let minimumDistance = Number.MAX_SAFE_INTEGER
-
-distances.forEach(distance => {
-  if (distance.distance < minimumDistance) {
-    minimumDistance = distance.distance
-    prediction = distance
+  if (!prediction) {
+    return false
   }
-})
 
-console.log(distances)
-console.log(`input      -> ${inputImage.label}`)
-console.log(`prediction -> ${prediction.label}`)
+  return inputImage.label === prediction.label
+}
