@@ -29,7 +29,11 @@ labels.forEach(label => {
 fs.writeFileSync('./dist/labeled-data.json', beautify({ imagesLength, data }, null, 2, 100))
 
 // k-fold cross validation
-let k = 4
+let k = 2
+
+if (process.argv[2]) {
+  k = parseInt(process.argv[2])
+}
 
 let slicedData = []
 

@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "node testing.js",
+    "generate": "node src/app/generate-training-and-testing-data.js",
     "dev": "node main.js"
   },
   "keywords": [
