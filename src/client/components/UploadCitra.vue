@@ -11,7 +11,16 @@
         </div>
         <div class="col-sm-5">
           <h6 class="text-muted mb-3">Histogram</h6>
-          <button class="btn btn-default" @click="getHistogram">Get Histogram</button>
+
+          <div v-if="!color">
+            <button class="btn btn-default" @click="getHistogram" v-if="!loadingHistogram">Get Histogram</button>
+            <p class="text-muted" v-else>
+              <small>Extracting...</small>
+            </p>
+          </div>
+          <div v-else>
+            <pre>{{ color.normalizedHistogram }}</pre>
+          </div>
         </div>
         <div class="col-sm-5">
           <h6 class="text-muted mb-3">Texture</h6>
@@ -25,7 +34,9 @@
 <script type="text/javascript">
 export default {
   data: () => ({
-    blobImage: null
+    blobImage: null,
+    loadingHistogram: false,
+    color: null
   }),
   methods: {
     onInputCitraChanged (e) {
@@ -47,12 +58,16 @@ export default {
 
       payload.append('image', file)
 
+      this.loadingHistogram = true
       let { data } = await this.$axios.post('feature-extraction/color', payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
-      console.log(data)
+
+      this.color = data
+
+      this.loadingHistogram = false
     }
   }
 }

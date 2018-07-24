@@ -1,6 +1,9 @@
 let express = require('express')
 let router = express.Router()
 let bodyParser = require('body-parser')
+let Jimp = require('jimp')
+let Fch = require('../../fch/fch.js')
+let fs = require('fs')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
@@ -20,7 +23,18 @@ router.post('/color', (req, res) => {
     }
 
     // baru di sini nanti diambil extraksi fiturnya
-    res.status(200).send(req.files)
+    Jimp.read(fileName).then(jimpImage => {
+      let fch = new Fch(jimpImage)
+      let normalizedHistogram = fch.getNormalizedHistogram()
+      let histogram = fch.getHistogram()
+
+      fs.unlinkSync(fileName)
+      res.status(200).send({
+        normalizedHistogram, histogram
+      })
+    }).catch(err => {
+      res.status(500).send(err)
+    })
   })
 })
 
