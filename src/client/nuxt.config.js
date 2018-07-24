@@ -40,7 +40,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    // some configurations
+    baseURL: process.env.BASE_API || 'http://localhost:1234'
   }
 }
 
