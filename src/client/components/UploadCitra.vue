@@ -24,7 +24,21 @@
         </div>
         <div class="col-sm-5">
           <h6 class="text-muted mb-3">Texture</h6>
-          <button class="btn btn-default">Get Texture</button>
+
+          <div v-if="!texture">
+            <button @click="getTexture" v-if="!loadingTexture" class="btn btn-default">Get Texture</button>
+            <p class="text-muted" v-else>
+              <small>Extracting...</small>
+            </p>
+          </div>
+          <div v-else>
+            <table class="table table-bordered">
+              <tr v-for="(feature, i) of Object.values(texture)" :key="i">
+                <th>{{ textureColumns[i] }}</th>
+                <td>{{ feature }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -36,7 +50,10 @@ export default {
   data: () => ({
     blobImage: null,
     loadingHistogram: false,
-    color: null
+    loadingTexture: false,
+    color: null,
+    texture: null,
+    textureColumns: [] // this is for the table
   }),
   methods: {
     onInputCitraChanged (e) {
@@ -68,6 +85,32 @@ export default {
       this.color = data
 
       this.loadingHistogram = false
+    },
+    async getTexture () {
+      let inputCitra = this.$refs['input-citra']
+      let file = inputCitra.files.length ? inputCitra.files[0] : null
+      let payload = new FormData()
+
+      payload.append('image', file)
+
+      this.loadingTexture = true
+      let { data } = await this.$axios.post('feature-extraction/texture', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      this.texture = data.texture
+
+      let textureColumns = []
+
+      for (let col in this.texture) {
+        textureColumns.push(col)
+        console.log(col)
+      }
+
+      this.textureColumns = textureColumns
+      this.loadingTexture = false
     }
   }
 }
