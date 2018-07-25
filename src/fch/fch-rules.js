@@ -79,9 +79,17 @@ exports.build = ({ mL, mA, mB }) => {
   })
 
   // rule 10
+  // rules.push({
+  //   when: new Rule()
+  //   .is(mL, 'grey').and().is(mA, 'reddish').and().is(mB, 'yellow')
+  //   .compare(),
+  //   then: 'yellow'
+  // })
+
+  // additional for yellow
   rules.push({
     when: new Rule()
-    .is(mL, 'grey').and().is(mA, 'reddish').and().is(mB, 'yellow')
+    .is(mL, 'white').and().is(mA, 'reddish').and().is(mB, 'yellow')
     .compare(),
     then: 'yellow'
   })
@@ -210,6 +218,14 @@ exports.build = ({ mL, mA, mB }) => {
   rules.push({
     when: new Rule()
     .is(mL, 'white').and().is(mA, 'reddish').and().is(mB, 'yellow')
+    .compare(),
+    then: 'orange'
+  })
+
+  // additional for orange
+  rules.push({
+    when: new Rule()
+    .is(mL, 'grey').and().is(mA, 'reddish').and().is(mB, 'yellow')
     .compare(),
     then: 'orange'
   })

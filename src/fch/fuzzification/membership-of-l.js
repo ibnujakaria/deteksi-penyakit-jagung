@@ -14,7 +14,7 @@ let triangular = new Triangular({
       label: 'grey',
       a: 10,
       b: 50,
-      c: 90
+      c: 85
     },
     {
       label: 'white',

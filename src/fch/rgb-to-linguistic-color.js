@@ -22,5 +22,7 @@ exports.convert = (rgb) => {
   // console.log({ l, a, b })
   // console.log({ mL, mA, mB })
 
-  return fuzzyLogic.getFuzzyResult()
+  let result = fuzzyLogic.getFuzzyResult()
+
+  return { ...result, fuzzySet: { mL, mA, mB } }
 }

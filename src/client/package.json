@@ -19,7 +19,8 @@
     "node-sass": "^4.9.2",
     "nuxt": "^1.0.0",
     "sass-loader": "^7.0.3",
-    "vue-chartjs": "^3.3.2"
+    "vue-chartjs": "^3.3.2",
+    "vue-color": "^2.4.6"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

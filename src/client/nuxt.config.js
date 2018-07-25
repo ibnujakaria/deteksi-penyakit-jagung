@@ -40,6 +40,9 @@ module.exports = {
     '@nuxtjs/axios',
     'bootstrap-vue/nuxt'
   ],
+  plugins: [
+    { src: '~/plugins/sketch.js', ssr: false }
+  ],
   axios: {
     baseURL: process.env.BASE_API || 'http://localhost:1234'
   }

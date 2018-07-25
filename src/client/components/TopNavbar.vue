@@ -9,8 +9,8 @@
         <b-nav-item href="#">Disabled</b-nav-item>
 
         <b-nav-item-dropdown text="Testing" right>
-          <nuxt-link class="dropdown-item" to="/ekstraksi-fitur">Ekstraksi Fitur</nuxt-link>
-          <nuxt-link class="dropdown-item" to="">RGB to Linguistic Color</nuxt-link>
+          <nuxt-link class="dropdown-item" to="/testing/ekstraksi-fitur">Ekstraksi Fitur</nuxt-link>
+          <nuxt-link class="dropdown-item" to="/testing/rgb-to-linguistic-color">RGB to Linguistic Color</nuxt-link>
           <nuxt-link class="dropdown-item" to="">GLRLM</nuxt-link>
         </b-nav-item-dropdown>
       </b-navbar-nav>
