@@ -13,20 +13,21 @@
           <h6 class="text-muted mb-3">Histogram</h6>
 
           <div v-if="!color">
-            <button class="btn btn-default" @click="getHistogram" v-if="!loadingHistogram">Get Histogram</button>
+            <button class="btn btn-sm btn-default" @click="getHistogram" v-if="!loadingHistogram">Get Histogram</button>
             <p class="text-muted" v-else>
               <small>Extracting...</small>
             </p>
           </div>
           <div v-else>
-            <pre>{{ color.normalizedHistogram }}</pre>
+            <!-- <pre>{{ color.normalizedHistogram }}</pre> -->
+            <color-histogram :color="color.normalizedHistogram"></color-histogram>
           </div>
         </div>
         <div class="col-sm-5">
           <h6 class="text-muted mb-3">Texture</h6>
 
           <div v-if="!texture">
-            <button @click="getTexture" v-if="!loadingTexture" class="btn btn-default">Get Texture</button>
+            <button @click="getTexture" v-if="!loadingTexture" class="btn btn-sm btn-default">Get Texture</button>
             <p class="text-muted" v-else>
               <small>Extracting...</small>
             </p>
@@ -46,6 +47,8 @@
 </template>
 
 <script type="text/javascript">
+import ColorHistogram from '~/components/ColorHistogram'
+
 export default {
   data: () => ({
     blobImage: null,
@@ -112,7 +115,8 @@ export default {
       this.textureColumns = textureColumns
       this.loadingTexture = false
     }
-  }
+  },
+  components: { ColorHistogram }
 }
 </script>
 
