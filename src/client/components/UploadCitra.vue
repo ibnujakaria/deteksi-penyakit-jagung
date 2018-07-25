@@ -2,7 +2,10 @@
   <div class="upload-citra">
     <div class="form-group" v-show="!blobImage">
       <label>Citra</label>
-      <input ref="input-citra" @change="onInputCitraChanged" class="form-control" type="file">
+      
+      <div class="mt-2">
+        <input ref="input-citra" @change="onInputCitraChanged" type="file">
+      </div>
     </div>
     <div v-show="blobImage">
       <div class="row">
@@ -43,6 +46,7 @@
         </div>
       </div>
     </div>
+    <b-btn @click="$emit('close', i)" class="pojok-kanan" size="sm" variant="default"><i class="fa fa-times"></i></b-btn>
   </div>
 </template>
 
@@ -50,6 +54,7 @@
 import ColorHistogram from '~/components/ColorHistogram'
 
 export default {
+  props: ['i'],
   data: () => ({
     blobImage: null,
     loadingHistogram: false,
@@ -125,9 +130,16 @@ export default {
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
 
     img {
       width: 100%;
+    }
+
+    .pojok-kanan {
+      position: absolute;
+      top: 20px;
+      right: 20px;
     }
   }
 </style>

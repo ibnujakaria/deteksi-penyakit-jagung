@@ -11,7 +11,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css' }
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css', integrity: 'sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ', crossorigin: 'anonymous' }
     ]
   },
   /*
@@ -37,7 +37,8 @@ module.exports = {
     }
   },
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'bootstrap-vue/nuxt'
   ],
   axios: {
     baseURL: process.env.BASE_API || 'http://localhost:1234'

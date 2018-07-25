@@ -1,14 +1,7 @@
 <template>
-  <section class="container mt-3">
-    <upload-citra></upload-citra>
+  <section class="container mt-5">
+    <h1>Deteksi Penyakit Jagung</h1>
   </section>
 </template>
 
-<script>
-import UploadCitra from '~/components/UploadCitra'
-
-export default {
-  components: { UploadCitra }
-}
-</script>
 
