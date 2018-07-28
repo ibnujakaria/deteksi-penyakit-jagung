@@ -9,9 +9,11 @@ let ed = require('./euclidean-distance.js')
  */
 exports.predict = (inputImage, datasets) => {
   let distances = []
-  // let inputFeatures = Object.values(inputImage.feature.color).concat(Object.values(inputImage.feature.texture))
+  let inputFeatures = Object.values(inputImage.feature.color).concat(Object.values(inputImage.feature.texture))
+
+  console.log(inputFeatures)
   // let inputFeatures = Object.values(inputImage.feature.texture)
-  let inputFeatures = Object.values(inputImage.feature.color)
+  // let inputFeatures = Object.values(inputImage.feature.color)
 
   let lastLabel = null
   let currentLabelLength = 1
@@ -28,9 +30,9 @@ exports.predict = (inputImage, datasets) => {
     } else {
       currentLabelLength++
 
-      // let currentFeatures = Object.values(image.feature.color).concat(Object.values(image.feature.texture))
+      let currentFeatures = Object.values(image.feature.color).concat(Object.values(image.feature.texture))
       // let currentFeatures = Object.values(image.feature.texture)
-      let currentFeatures = Object.values(image.feature.color)
+      // let currentFeatures = Object.values(image.feature.color)
       distanceToCurrentLabel += ed.measure(inputFeatures, currentFeatures)
     }
 

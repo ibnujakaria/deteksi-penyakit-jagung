@@ -20,9 +20,11 @@ try {
         imagesHadBeenRead++
         console.log(`training ${image.path} (${imagesHadBeenRead}/${labeledData.imagesLength})`)
 
+        jimpImage.resize(100, Jimp.AUTO)
         // console.log('   -> running fch..')
         let fch = new Fch(jimpImage)
-        let color = fch.getNormalizedHistogram()
+        // let color = fch.getNormalizedHistogram()
+        let color = fch.getHistogram()
 
         // console.log('   -> running glrlm')
         let glrlm = new Glrlm(jimpImage)

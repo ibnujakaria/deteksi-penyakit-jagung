@@ -31,7 +31,7 @@ module.exports = class Glrlm {
       lre: longRunEmphasis.compute(this.matrix),
       gln: greyLevelNonUniformity.compute(this.matrix),
       rln: runLengthNonUniformity.compute(this.matrix),
-      rp: runPercentage.compute(this.matrix),
+      // rp: runPercentage.compute(this.matrix),
       lglre: lowGreyLevelRunEmphasis.compute(this.matrix),
       hglre: highGreyLevelRunEmphasis.compute(this.matrix)
     }
