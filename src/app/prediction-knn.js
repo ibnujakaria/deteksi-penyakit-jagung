@@ -22,7 +22,6 @@ exports.predict = (inputImage, datasets) => {
 
   let closestsNeighbours = knn(inputFeatures, datasetFeatures, {
     k: 5,
-    standardize: true,
     key: (object) => object.features
   })
 
