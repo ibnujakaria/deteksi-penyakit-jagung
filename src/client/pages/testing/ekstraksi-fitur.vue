@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-3">
-    <h2>Ekstraksi Fitur</h2>
+  <div class="container mt-5">
+    <h1>Ekstraksi Fitur</h1>
     <hr>
     <upload-citra class="mb-3" @close="removeImage(i)" v-for="(container, i) in containers" :key="i" :i="i"></upload-citra>
     

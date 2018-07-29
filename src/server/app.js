@@ -9,6 +9,7 @@ let DataController = require('./router/DataController')
 
 app.use(cors())
 app.use(fileUpload())
+app.use('/images/', express.static('./images'))
 app.use('/feature-extraction', ColorExtraction)
 app.use('/feature-extraction', TextureExtraction)
 app.use('/data', DataController)

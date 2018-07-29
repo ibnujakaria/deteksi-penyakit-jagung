@@ -5,8 +5,11 @@
 
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
-        <b-nav-item href="#">Data</b-nav-item>
-        <b-nav-item href="#">Disabled</b-nav-item>
+        <li class="nav-item">
+          <nuxt-link to="/data" class="nav-link">Data</nuxt-link>
+        </li>
+        <b-nav-item href="#">K-Fold</b-nav-item>
+        <b-nav-item href="#">Hasil</b-nav-item>
 
         <b-nav-item-dropdown text="Testing" right>
           <nuxt-link class="dropdown-item" to="/testing/ekstraksi-fitur">Ekstraksi Fitur</nuxt-link>
