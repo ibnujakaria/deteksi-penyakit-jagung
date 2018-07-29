@@ -1,6 +1,7 @@
 let fs = require('fs')
 let featureFinder = require('./src/app/find-feature-by-path.js')
-let prediction = require('./src/app/prediction.js')
+// let prediction = require('./src/app/prediction.js')
+let prediction = require('./src/app/prediction-knn.js')
 
 let kFolds = fs.readdirSync('./dist/k-fold')
 
@@ -35,10 +36,10 @@ kFolds.forEach((file, i) => {
   })
 })
 
-let accuracy = (correct / incorrect * 100).toFixed(2)
+let accuracy = (correct / length * 100).toFixed(2)
 
 console.log(`correct -> ${correct}`)
-console.log(`incorrect -> ${incorrect}`)
+// console.log(`incorrect -> ${incorrect}`)
 console.log(`length -> ${length}`)
 
 console.log(`accuracy -> ${accuracy}%`)
