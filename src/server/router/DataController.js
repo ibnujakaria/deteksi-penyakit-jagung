@@ -13,20 +13,24 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/k-fold/:k', (req, res) => {
-  let files = fs.readdirSync(`./dist/k-fold/k-${req.params.k}`)
-  let data = []
+  try {
+    let files = fs.readdirSync(`./dist/k-fold/k-${req.params.k}`)
+    let data = []
 
-  files.forEach((file, k) => {
-    let { training, testing } = JSON.parse(
-      fs.readFileSync(
-        `./dist/k-fold/k-${req.params.k}/${file}`
+    files.forEach((file, k) => {
+      let { training, testing } = JSON.parse(
+        fs.readFileSync(
+          `./dist/k-fold/k-${req.params.k}/${file}`
+        )
       )
-    )
 
-    data.push({ k, training, testing })
-  })
+      data.push({ k, training, testing })
+    })
 
-  res.send(data)
+    res.send(data)
+  } catch (error) {
+    res.status(404).send(error)
+  }
 })
 
 module.exports = router
