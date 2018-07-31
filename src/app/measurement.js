@@ -13,6 +13,40 @@ let knnClassifier = require('./prediction-knn.js')
  */
 exports.measure = (kFold, usedFeature, classifier) => {
   let files = fs.readdirSync(`./dist/k-fold/${kFold}`) 
+
+  console.log(`      + kFold k: ${kFold}`)
+  if (classifier === 'knn') {
+    let result = {}
+    let sameResult = 1
+
+    for (let k = 1; k <= 1000; k++) {
+      let measurement = getAccuracy(files, {
+        kFold, usedFeature, classifier, k
+      })
+
+      result[`neighbour-${k}`] = measurement
+
+      console.log(`         * k-neighbour: ${k}`)
+
+      // if it produced the same result three times then break
+      if (k > 1 && measurement.accuracy === result[`neighbour-${k - 1}`].accuracy) {
+        sameResult++
+      } else {
+        sameResult = 1
+      }
+
+      if (sameResult > 2) {
+        break
+      }
+    }
+
+    return result
+  } else {
+    return getAccuracy(files, { kFold, usedFeature, classifier })
+  }
+}
+
+function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
   let correct = 0
   let incorrect = 0
   let length = 0
@@ -23,7 +57,8 @@ exports.measure = (kFold, usedFeature, classifier) => {
 
     testingFeatures.forEach(image => {
       let options = {
-        feature: usedFeature
+        feature: usedFeature,
+        k
       }
 
       let isWellPredicted = false
@@ -45,12 +80,13 @@ exports.measure = (kFold, usedFeature, classifier) => {
 
   let accuracy = (correct / length * 100).toFixed(2)
 
-  console.log(`      K-Fold dengan ${kFold}`)
-  // console.log(`correct -> ${correct}`)
-  // console.log(`length -> ${length}`)
-  console.log(`      accuracy -> ${accuracy}%`)
+  // // console.log(`correct -> ${correct}`)
+  // // console.log(`length -> ${length}`)
+  // console.log(`      accuracy -> ${accuracy}%`)
 
-  console.log('      ------------------')
+  // console.log('      ------------------')
+
+  return { correct, incorrect, length, accuracy }
 }
 
 function getFeatures (data) {
