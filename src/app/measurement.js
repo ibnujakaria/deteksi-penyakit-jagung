@@ -40,6 +40,10 @@ exports.measure = (kFold, usedFeature, classifier) => {
       }
     }
 
+    let overview = getBestAccuracy(result)
+
+    result = { overview, ...result }
+
     return result
   } else {
     return getAccuracy(files, { kFold, usedFeature, classifier })
@@ -78,7 +82,7 @@ function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
     })
   })
 
-  let accuracy = (correct / length * 100).toFixed(2)
+  let accuracy = correct / length * 100
 
   // // console.log(`correct -> ${correct}`)
   // // console.log(`length -> ${length}`)
@@ -103,3 +107,25 @@ function getFeatures (data) {
 
   return { trainingFeatures, testingFeatures }
 }
+
+function getBestAccuracy(object) {
+  let bestAccuracy = -1
+  let bestAttr = null
+
+  for (let attr in object) {
+    let accuracy = object[attr].accuracy
+
+    if (accuracy === undefined && object[attr].overview) {
+      accuracy = object[attr].overview.bestAccuracy
+    }
+
+    if (accuracy > bestAccuracy) {
+      bestAccuracy = accuracy
+      bestAttr = attr
+    }
+  }
+
+  return { bestAttr, bestAccuracy }
+}
+
+exports.getBestAccuracy = getBestAccuracy

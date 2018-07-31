@@ -19,9 +19,18 @@ for (let usedFeature of ['color', 'texture', 'all']) {
 
       result[classifier][kFold] = measurement.measure(kFold, usedFeature, classifier)
     })
+
+    let overview = measurement.getBestAccuracy(result[classifier])
+    result[classifier] = { overview, ...result[classifier] }
   }
+
+  let overview = measurement.getBestAccuracy(result)
+  result = { overview, ...result }
 
   results[usedFeature] = result
 }
+
+let overview = measurement.getBestAccuracy(results)
+results = { overview, ...results }
 
 fs.writeFileSync('./dist/results.json', beautify(results, null, 2, 100))
