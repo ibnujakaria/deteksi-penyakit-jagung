@@ -11,6 +11,12 @@
     "watch": "nodemon src/server/server.js",
     "extraction": "node src/app/feature-extraction.js"
   },
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "3000"
+    }
+  },
   "keywords": [
     "Image",
     "Processing",
