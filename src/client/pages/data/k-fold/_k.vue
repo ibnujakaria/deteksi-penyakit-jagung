@@ -11,7 +11,7 @@
       <h4 class="text-muted">{{ label.label }}</h4>
       
       <div class="row">
-        <div class="col-sm-2" v-for="(image, j) of label.images" :key="j">
+        <div class="col-sm-2 col-6" v-for="(image, j) of label.images" :key="j">
           <image-box :image="image" :active="isThisTestingData(image)"></image-box>
         </div>  
       </div>

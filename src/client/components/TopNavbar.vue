@@ -16,10 +16,9 @@
           <b-dropdown-item to="/data/k-fold/5">Data K-5</b-dropdown-item>
           <b-dropdown-item to="/data/k-fold/6">Data K-6</b-dropdown-item>
           <b-dropdown-item to="/data/k-fold/7">Data K-7</b-dropdown-item>
-          <b-dropdown-item to="/data/k-fold/8">Data K-8</b-dropdown-item>
         </b-nav-item-dropdown>
 
-        <b-nav-item href="#">Hasil</b-nav-item>
+        <b-nav-item to="/report">Hasil</b-nav-item>
 
         <b-nav-item-dropdown text="Testing" left>
           <b-dropdown-item to="/testing/ekstraksi-fitur">Ekstraksi Fitur</b-dropdown-item>

@@ -12,3 +12,9 @@ export default {
   components: { TopNavbar }
 }
 </script>
+
+<style type="text/css">
+  .brown {
+    color: brown;
+  }
+</style>
