@@ -1,17 +1,33 @@
 let fs = require('fs')
 let ed = require('./euclidean-distance.js')
 
+let defaultOptions = {
+  k: 2,
+  feature: 'all' // all|texture|color
+}
+
 /**
  * @param {object} inputImage
  * The object inputImage is an object with all features extracted
  * @param {array} datasets
  * Array of images with all features extracted, or we can call it as training data
  */
-exports.predict = (inputImage, datasets) => {
+exports.predict = (inputImage, datasets, customOptions) => {
+  let options = { ...defaultOptions, ...customOptions }
   let distances = []
-  let inputFeatures = Object.values(inputImage.feature.color).concat(Object.values(inputImage.feature.texture))
+  let inputFeatures
 
-  console.log(inputFeatures)
+  if (options.feature === 'all') {
+    inputFeatures = Object.values(inputImage.feature.color).concat(Object.values(inputImage.feature.texture))
+  } else if (options.feature === 'texture') {
+    inputFeatures = Object.values(inputImage.feature.texture)
+  } else if (options.feature === 'color') {
+    inputFeatures = Object.values(inputImage.feature.color)
+  } else {
+    throw `unknown ${options.feature} feature`
+  }
+
+  // console.log(inputFeatures)
   // let inputFeatures = Object.values(inputImage.feature.texture)
   // let inputFeatures = Object.values(inputImage.feature.color)
 
@@ -30,9 +46,17 @@ exports.predict = (inputImage, datasets) => {
     } else {
       currentLabelLength++
 
-      let currentFeatures = Object.values(image.feature.color).concat(Object.values(image.feature.texture))
-      // let currentFeatures = Object.values(image.feature.texture)
-      // let currentFeatures = Object.values(image.feature.color)
+      let currentFeatures
+
+      if (options.feature === 'all') {
+        currentFeatures = Object.values(image.feature.color).concat(Object.values(image.feature.texture))
+      } else if (options.feature === 'texture') {
+        currentFeatures = Object.values(image.feature.texture)
+      } else if (options.feature === 'color') {
+        currentFeatures = Object.values(image.feature.color)
+      } else {
+        throw `unknown ${options.feature} feature`
+      }
       distanceToCurrentLabel += ed.measure(inputFeatures, currentFeatures)
     }
 

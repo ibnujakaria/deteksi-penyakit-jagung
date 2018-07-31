@@ -1,27 +1,50 @@
 let fs = require('fs')
 let knn = require('alike')
 
+let defaultOptions = {
+  k: 2,
+  feature: 'all' // all|texture|color
+}
+
 /**
  * @param {object} inputImage
  * The object inputImage is an object with all features extracted
  * @param {array} datasets
  * Array of images with all features extracted, or we can call it as training data
  */
-exports.predict = (inputImage, datasets) => {
-  let inputFeatures = { ...inputImage.feature.color, ...inputImage.feature.texture }
+exports.predict = (inputImage, datasets, customOptions) => {
+  let options = { ...defaultOptions, ...customOptions }
   let datasetFeatures = []
+  let inputFeatures
+
+  if (options.feature === 'all') {
+    inputFeatures = { ...inputImage.feature.color, ...inputImage.feature.texture }
+  } else if (options.feature === 'texture') {
+    inputFeatures = { ...inputImage.feature.texture }
+  } else if (options.feature === 'color') {
+    inputFeatures = { ...inputImage.feature.color }
+  } else {
+    throw 'Unknown parameter of options.feature'
+  }
 
   datasets.forEach(image => {
-    datasetFeatures.push(
-      {
-        label: image.label,
-        features: { ...image.feature.color, ...image.feature.texture  }
-      }
-    )
+    let features
+
+    if (options.feature === 'all') {
+      features = { ...image.feature.color, ...image.feature.texture }
+    } else if (options.feature === 'texture') {
+      features = { ...image.feature.texture }
+    } else if (options.feature === 'color') {
+      features = { ...image.feature.color }
+    } else {
+      throw 'Unknown parameter of options.feature'
+    }
+
+    datasetFeatures.push({ label: image.label, features })
   })
 
   let closestsNeighbours = knn(inputFeatures, datasetFeatures, {
-    k: 5,
+    k: options.k,
     key: (object) => object.features
   })
 
