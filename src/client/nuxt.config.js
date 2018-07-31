@@ -38,6 +38,7 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
     'bootstrap-vue/nuxt'
   ],
   plugins: [
