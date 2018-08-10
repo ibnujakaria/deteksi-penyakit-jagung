@@ -7,6 +7,7 @@ let TextureExtraction = require('./router/TextureExtraction.js')
 let RgbToLinguisticColor = require('./router/RgbToLinguisticColor.js')
 let DataController = require('./router/DataController')
 let ResultController = require('./router/ResultController')
+let PredictController = require('./router/PredictController')
 
 app.use(cors())
 app.use(fileUpload())
@@ -15,6 +16,7 @@ app.use('/feature-extraction', ColorExtraction)
 app.use('/feature-extraction', TextureExtraction)
 app.use('/data', DataController)
 app.use('/results', ResultController)
+app.use('/predict', PredictController)
 app.use('/', RgbToLinguisticColor)
 
 module.exports = app

@@ -84,5 +84,5 @@ exports.predict = (inputImage, datasets, customOptions) => {
 
   let i = Math.floor(Math.random() * Math.floor(mostAppearedLabels.length))
 
-  return mostAppearedLabels[i] === inputImage.label
+  return mostAppearedLabels[i]
 }

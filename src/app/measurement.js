@@ -70,7 +70,7 @@ function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
       if (classifier === 'ed-classifier') {
         isWellPredicted = edClassifier.predict(image, trainingFeatures, options)
       } else if (classifier === 'knn') {
-        isWellPredicted = knnClassifier.predict(image, trainingFeatures, options)
+        isWellPredicted = knnClassifier.predict(image, trainingFeatures, options) === image.label
       }
 
       if (isWellPredicted) {

@@ -19,6 +19,7 @@
         </b-nav-item-dropdown>
 
         <b-nav-item to="/report">Hasil</b-nav-item>
+        <b-nav-item to="/prediction">Prediksi</b-nav-item>
 
         <b-nav-item-dropdown text="Testing" left>
           <b-dropdown-item to="/testing/ekstraksi-fitur">Ekstraksi Fitur</b-dropdown-item>
