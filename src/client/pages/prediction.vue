@@ -73,6 +73,7 @@ export default {
       payload.append('image', file)
 
       this.loading = true
+      this.result = false
 
       try {
         let { data } = await this.$axios.post('predict', payload, {
