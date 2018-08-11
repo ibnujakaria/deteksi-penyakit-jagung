@@ -79,8 +79,8 @@ exports.predict = (inputImage, datasets, customOptions) => {
   // console.log('---------------')
 
   if (!prediction) {
-    return false
+    return null
   }
 
-  return inputImage.label === prediction.label
+  return prediction.label
 }

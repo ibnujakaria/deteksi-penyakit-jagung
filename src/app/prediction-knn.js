@@ -78,9 +78,9 @@ exports.predict = (inputImage, datasets, customOptions) => {
 
   // console.log({ neighbourLabels, mostAppearedLabels })
 
-  if (mostAppearedLabels.find(label => label === inputImage.label)) {
-    return true
-  }
+  // if (mostAppearedLabels.find(label => label === inputImage.label)) {
+  //   return true
+  // }
 
   let i = Math.floor(Math.random() * Math.floor(mostAppearedLabels.length))
 
