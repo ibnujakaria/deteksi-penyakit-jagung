@@ -19,7 +19,7 @@ exports.measure = (kFold, usedFeature, classifier) => {
     let result = {}
     let sameResult = 1
 
-    for (let k = 1; k <= 1000; k++) {
+    for (let k = 1; k <= 50; k++) {
       let measurement = getAccuracy(files, {
         kFold, usedFeature, classifier, k
       })
