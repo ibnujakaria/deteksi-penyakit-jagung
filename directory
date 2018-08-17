@@ -1,0 +1,22 @@
+images
+└── penyakit-jagung
+    ├── bercak-daun
+    │   ├── bercak-daun-citra-01.jpg
+    │   ├── bercak-daun-citra-02.jpg
+    │   ├── bercak-daun-citra-03.jpg
+    │   └── ...
+    ├── hawar-daun
+    │   ├── hawar-daun-citra-01.jpg
+    │   ├── hawar-daun-citra-02.jpg
+    │   ├── hawar-daun-citra-03.jpg
+    │   └── ...
+    ├── karat-daun
+    │   ├── karat-daun-citra-01.jpg
+    │   ├── karat-daun-citra-02.jpg
+    │   ├── karat-daun-citra-03.jpg
+    │   └── ...
+    └── sehat
+        ├── sehat-citra-01.jpg
+        ├── sehat-citra-02.jpg
+        ├── sehat-citra-03.jpg
+        └── ...
