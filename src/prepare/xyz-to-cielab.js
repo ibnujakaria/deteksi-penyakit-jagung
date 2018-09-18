@@ -1,7 +1,7 @@
 exports.convert = ({ x, y, z }) => {
-  let xRef = 95.047  
-  let yRef = 100.000
-  let zRef = 108.883
+  const xRef = 95.047  
+  const yRef = 100.000
+  const zRef = 108.883
 
   let l, a, b
 
