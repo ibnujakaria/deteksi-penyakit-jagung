@@ -10,7 +10,7 @@ for (let usedFeature of ['color', 'texture', 'all']) {
 
   let result = {}
 
-  for (let classifier of ['ed-classifier', 'knn', 'naive-bayes']) {
+  for (let classifier of [/* 'ed-classifier', */ 'knn', 'naive-bayes']) {
     console.log(`   -> ${classifier}`)
     kFolds.forEach(kFold => {
       if (result[classifier] === undefined) {

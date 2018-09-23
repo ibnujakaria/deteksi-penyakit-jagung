@@ -5,7 +5,7 @@ let knnClassifier = require('./prediction-knn.js')
 
 /**
  * This module is used to measure accuracy from data which have
- * been separated before
+ * been separated
  *
  * @param kFold | the folder name inside /dist/k-fold
  * @param usedFeature | {all|texture|color}
@@ -19,7 +19,7 @@ exports.measure = (kFold, usedFeature, classifier) => {
     let result = {}
     let sameResult = 1
 
-    for (let k = 1; k <= 50; k++) {
+    for (let k = 1; k <= 20; k++) {
       let measurement = getAccuracy(files, {
         kFold, usedFeature, classifier, k
       })

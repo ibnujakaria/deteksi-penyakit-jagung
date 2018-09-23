@@ -66,8 +66,16 @@ exports.predict = (inputImage, datasets, customOptions) => {
     }
   }
   
-  // it is an array for dealing with the condition if
-  // two or more labels has appeared the same time
+  /**
+   * @type array
+   * @description
+   * it is an array for the most appeared label
+   * normally, this variable will only have one label
+   * 
+   * but it will have more if there are more than one 
+   * label which have the same value of appearence in 
+   * variable closestsNeighbours
+   */
   let mostAppearedLabels = []
   
   for (let label in neighbourLabels) {
@@ -78,11 +86,17 @@ exports.predict = (inputImage, datasets, customOptions) => {
 
   // console.log({ neighbourLabels, mostAppearedLabels })
 
-  if (mostAppearedLabels.find(label => label === inputImage.label)) {
-    return inputImage.label
+  /* If there is only one label */
+  if (mostAppearedLabels.length === 1) {
+    return mostAppearedLabels[0]
   }
 
-  let i = Math.floor(Math.random() * Math.floor(mostAppearedLabels.length))
+  /** 
+   * It it has more than one label, then return the very first label
+   * appeared in closestsNeighbours
+   */
 
-  return mostAppearedLabels[i]
+   closestsNeighbours.forEach(neighbour => {
+    return mostAppearedLabels.find(label => label === neighbour.label)
+   })
 }

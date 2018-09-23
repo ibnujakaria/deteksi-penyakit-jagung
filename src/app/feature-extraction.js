@@ -18,7 +18,7 @@ try {
     group.images.forEach(image => {
       Jimp.read(`./images/penyakit-jagung/${image.path}`).then(jimpImage => {
         imagesHadBeenRead++
-        console.log(`training ${image.path} (${imagesHadBeenRead}/${labeledData.imagesLength})`)
+        console.log(`extracting ${image.path} (${imagesHadBeenRead}/${labeledData.imagesLength})`)
 
         jimpImage.resize(100, Jimp.AUTO)
         // console.log('   -> running fch..')
