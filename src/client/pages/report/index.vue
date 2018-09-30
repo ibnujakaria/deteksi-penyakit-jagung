@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <h3 class="md-4">Nilai Ketetanggaan KNN</h3>
         <p>
           Pada grafik di samping menunjukkan tingkat akurasi klasifikasi ditinjau dari jumlah nilai ketetanggaannya.
@@ -43,7 +43,7 @@
           Hampir pada semua k-fold <strong class="brown">nilai ketanggaan k = 2 selalu paling tinggi</strong>.
         </p>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-6">
         <line-chart :labels="labelsForKnn" :datasets="dataSetsForKnn"></line-chart>
       </div>
     </div>
@@ -103,10 +103,11 @@ export default {
     },
     dataSetsForKnn () {
       let datasets = []
+      let knnData = this.result.all.knn
 
       if (this.result) {
         let i = 0
-        for (let kFold in this.result.all.knn) {
+        for (let kFold in knnData) {
           if (kFold !== 'overview') {
             let set = {
               label: kFold,
@@ -115,9 +116,9 @@ export default {
               data: []
             }
 
-            for (let label in this.result.all.knn[kFold]) {
+            for (let label in knnData[kFold]) {
               if (label !== 'overview') {
-                set.data.push(this.result.all.knn[kFold][label].accuracy)
+                set.data.push(knnData[kFold][label].accuracy)
               }
             }
 
