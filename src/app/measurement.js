@@ -54,6 +54,7 @@ function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
   let correct = 0
   let incorrect = 0
   let length = 0
+  let details = {} // ini untuk confulsive matrices atau apalah itu namanya
 
   files.forEach((file, i) => {
     let data = JSON.parse(fs.readFileSync(`./dist/k-fold/${kFold}/${file}`))
@@ -66,11 +67,24 @@ function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
       }
 
       let isWellPredicted = false
+      let predictedLabel = null
 
       if (classifier === 'ed-classifier') {
-        isWellPredicted = edClassifier.predict(image, trainingFeatures, options) === image.label
+        predictedLabel = edClassifier.predict(image, trainingFeatures, options)
+        isWellPredicted = predictedLabel === image.label
       } else if (classifier === 'knn') {
-        isWellPredicted = knnClassifier.predict(image, trainingFeatures, options) === image.label
+        predictedLabel = knnClassifier.predict(image, trainingFeatures, options)
+        isWellPredicted = predictedLabel === image.label
+      }
+
+      if (!details[image.label]) {
+        details[image.label] = {}
+      }
+
+      if (details[image.label][predictedLabel] === undefined) {
+        details[image.label][predictedLabel] = 1
+      } else {
+        details[image.label][predictedLabel]++
       }
 
       if (isWellPredicted) {
@@ -90,7 +104,7 @@ function getAccuracy(files, { kFold, usedFeature, classifier, k }) {
 
   // console.log('      ------------------')
 
-  return { correct, incorrect, length, accuracy }
+  return { correct, incorrect, length, accuracy, details }
 }
 
 function getFeatures (data) {
