@@ -99,4 +99,6 @@ exports.predict = (inputImage, datasets, customOptions) => {
    closestsNeighbours.forEach(neighbour => {
     return mostAppearedLabels.find(label => label === neighbour.label)
    })
+
+   return mostAppearedLabels[0]
 }
