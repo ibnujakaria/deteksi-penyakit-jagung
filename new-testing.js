@@ -5,7 +5,6 @@ let beautify = require("json-beautify")
 let params = process.argv
 let feature = params.find(arg => arg.match(/feature\=/g))
 let fold = params.find(arg => arg.match(/fold\=/g))
-let neighbour = params.find(arg => arg.match(/neighbour\=/g))
 
 feature = feature ? feature.split('=')[1] : null
 fold = fold ? parseInt(fold.split('=')[1]) : null
