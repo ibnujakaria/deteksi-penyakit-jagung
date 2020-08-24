@@ -19,22 +19,22 @@
     }
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.1",
-    "@nuxtjs/dotenv": "^1.1.1",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "@nuxtjs/axios": "^5.12.1",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "bootstrap-vue": "^2.16.0",
     "chart": "^0.1.2",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.3",
     "node-sass": "^4.9.3",
-    "nuxt": "^1.0.0",
-    "sass-loader": "^7.0.3",
-    "vue-chartjs": "^3.4.0",
-    "vue-color": "^2.4.6"
+    "nuxt": "^1.4.5",
+    "sass-loader": "^7.3.1",
+    "vue-chartjs": "^3.5.1",
+    "vue-color": "^2.7.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.7.1"
   }
 }
