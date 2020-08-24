@@ -10,12 +10,26 @@ features.forEach(feature => {
   let folds = fs.readdirSync(`./dist/partial-results/${feature}`)
 
   results[feature] = { [classifier]: {} }
+
+  let fold10SimpanTaruhBelakang = null
   folds.forEach(fold => {
     let file = JSON.parse(fs.readFileSync(`./dist/partial-results/${feature}/${fold}`))
-    let attr = fold.split('.')[0]
+    let attr = fold.split('.')[0].split('-')
 
-    results[feature][classifier][attr] = file
+    if (attr[1].length < 2) {
+      attr[1] = `0${attr[1]}`
+    }
+    
+    attr = attr.join('-')
+
+    if (attr === 'fold-10') {
+      fold10SimpanTaruhBelakang = file
+    } else {
+      results[feature][classifier][attr] = file
+    }
   })
+
+  results[feature][classifier]['fold-10'] = fold10SimpanTaruhBelakang
   
   results[feature][classifier] = {
     overview: measurement.getBestAccuracy(results[feature][classifier]),
