@@ -24,5 +24,9 @@ exports.convert = (rgb) => {
 
   let result = fuzzyLogic.getFuzzyResult()
 
-  return { ...result, fuzzySet: { mL, mA, mB } }
+  return {
+    ...result,
+    fuzzySet: { mL, mA, mB },
+    labColor: { l, a, b }
+  }
 }
