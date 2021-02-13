@@ -46,6 +46,12 @@ npm run serve
 
 ```bash
 cd src/client
+npm install # dont forget to install it first
+```
+
+#### Jalankan aplikasi
+
+```bash
 npm run dev
 ```
 
