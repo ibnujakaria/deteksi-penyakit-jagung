@@ -15,6 +15,7 @@
               <pre>{{ colors.rgba }}</pre>
             </div>
             <div v-if="result">
+              <pre>{{ result.labColor }}</pre>
               <pre>{{ result.fuzzySet }}</pre>
             </div>
           </div>
@@ -31,6 +32,7 @@
                 {{ possibility.color }} ({{ possibility.value.toFixed(2) }}%)
               </strong>
             </div>
+            <pre>{{ result.possibleLinguisticColors }}</pre>
           </div>
         </div>
         <div v-else>

@@ -2,10 +2,14 @@
   <div class="container mt-5">
     <h1>Ekstraksi Fitur</h1>
     <hr>
-    <upload-citra class="mb-3" @close="removeImage(i)" v-for="(container, i) in containers" :key="i" :i="i"></upload-citra>
+    <upload-citra
+      class="mb-3"
+      @close="removeImage(i)"
+      v-for="(container, i) in containers"
+      :key="i" :i="i" />
     
     <div class="mt-3">
-      <b-btn @click="addImage">Add Image</b-btn>
+      <button @click="addImage">Add Image</button>
     </div>
   </div>
 </template>

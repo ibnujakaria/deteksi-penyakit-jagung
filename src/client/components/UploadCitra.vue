@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <b-btn @click="$emit('close', i)" class="pojok-kanan" size="sm" variant="default"><i class="fa fa-times"></i></b-btn>
+    <button @click="$emit('close', i)" class="pojok-kanan" size="sm" variant="default"><i class="fa fa-times"></i></button>
   </div>
 </template>
 
